@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="title logo.png">
+    <title>Aditya Raj Srivastava Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 1.5s ease;
+        }
+        
+        .project-card {
+            perspective: 1000px;
+        }
+        
+        .project-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .project-card-front, .project-card-back {
+            backface-visibility: hidden;
+        }
+        
+        .project-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(108, 92, 231, 0.4);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Typewriter effect */
+        .typewriter {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .typewriter-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
+        
+        /* For the rotating words */
+        .rotating-words {
+            display: inline-block;
+            position: relative;
+            height: 1.2em;
+            overflow: hidden;
+        }
+        
+        .rotating-word {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            animation: rotateWords 12s linear infinite 0s;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .rotating-word:nth-child(2) {
+            animation-delay: 3s;
+        }
+        .rotating-word:nth-child(3) {
+            animation-delay: 6s;
+        }
+        .rotating-word:nth-child(4) {
+            animation-delay: 9s;
+        }
+        
+        @keyframes rotateWords {
+            0% { opacity: 0; transform: translateY(20px); }
+            2% { opacity: 1; transform: translateY(0px); }
+            18% { opacity: 1; transform: translateY(0px); }
+            20% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--darker);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s ease;
+                z-index: 100;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .rotating-words {
+                height: 3.6em; /* Adjust for mobile to show all rotating words */
+            }
+            
+            .rotating-word {
+                position: relative;
+                opacity: 1;
+                animation: none;
+                display: block;
+                margin-bottom: 0.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-[#16213e] bg-opacity-90 backdrop-blur-sm z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-white">
+                    <span class="text-[#6c5ce7]">ADITYA RAJ </span>Srivastava
+                </a>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars text-2xl text-white"></i>
+                </div>
+                
+                <div class="nav-links hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-[#a29bfe]">Home</a>
+                    <a href="#about" class="nav-link text-white hover:text-[#a29bfe]">About</a>
+                    <a href="#services" class="nav-link text-white hover:text-[#a29bfe]">Services</a>
+                    <a href="#projects" class="nav-link text-white hover:text-[#a29bfe]">Projects</a>
+                    <a href="#contact" class="nav-link text-white hover:text-[#a29bfe]">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 hero-text">
+                        Hi, I'm <span class="text-white">Aditya</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6">
+                        <span class="rotating-words">
+                            <span class="rotating-word">Full Stack Developer</span>
+                            <span class="rotating-word">Python Developer</span>
+                            <span class="rotating-word">Real-time Project Specialist</span>
+                            <span class="rotating-word">UI/UX Designer</span>
+                        </span>
+                    </h2>
+                    <p class="text-lg mb-8 text-gray-300 max-w-lg">
+                        I create beautiful, functional websites and applications with modern technologies and clean code.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="btn-primary px-6 py-3 rounded-full text-white font-medium">
+                            Hire Me
+                        </a>
+                        <a href="#projects" class="px-6 py-3 rounded-full border border-[#6c5ce7] text-[#6c5ce7] font-medium hover:bg-[#6c5ce7] hover:text-white transition">
+                            View Work
+                        </a>
+                    </div>
+                    <div class="flex mt-8 space-x-4">
+                        <a href="https://github.com/adityar2216v" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/aditya-raj-srivastava-401b75328" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="https://x.com/Aditya_Raj_Sri?t=7L4PY4n9hKbf618g6SsdSA&s=08" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="https://www.instagram.com/aditya_raj_srivastava_02/" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#6c5ce7] to-[#fd79a8] rounded-full opacity-20 blur-xl"></div>
+                        <img src="main.jpg" 
+                             alt="Profile" 
+                             class="relative w-full h-half rounded-full object-cover border-4 border-[#6c5ce7] floating">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-[#16213e]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="text-[#6c5ce7]">Me</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative w-64 h-64">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#6c5ce7] to-[#fd79a8] rounded-lg opacity-20 blur-xl"></div>
+                        <img src="image1.jpg" 
+                             alt="About" 
+                             class="relative w-full h-full rounded-lg object-cover">
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-semibold mb-4">Who am I?</h3>
+                    <p class="text-gray-300 mb-6">
+                        I'm a passionate Full Stack Developer with real time project experience creating modern web applications. 
+                        I specialize in JavaScript technologies across the whole stack (React.js, Node.js, Express, MongoDB) 
+                        as well as Python for data-intensive applications and real-time systems.
+                    </p>
+                    <p class="text-gray-300 mb-8">
+                        My approach combines technical expertise with creative problem-solving to deliver high-quality, 
+                        user-friendly solutions. I'm dedicated to continuous learning and staying updated with the latest 
+                        industry trends, especially in real-time communication technologies and scalable architectures.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h4 class="font-medium mb-2 text-[#a29bfe]">Name:</h4>
+                            <p class="text-gray-300">Aditya Raj Srivastava
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2 text-[#a29bfe]">Email:</h4>
+                            <p class="text-gray-300">srivastavaadityaraj0205@gmail.com</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2 text-[#a29bfe]">From:</h4>
+                            <p class="text-gray-300">Greater Noida, India</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2 text-[#a29bfe]">Experience:</h4>
+                            <p class="text-gray-300">Currently Studying</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h4 class="font-medium mb-4 text-[#a29bfe]">Skills:</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">HTML/CSS</span>
+                                    <span class="text-gray-300">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">JavaScript</span>
+                                    <span class="text-gray-300">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">Python</span>
+                                    <span class="text-gray-300">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-300">Real-time Systems</span>
+                                    <span class="text-gray-300">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                    <a href="aditya resume.pdf" class="btn-primary px-6 py-3 rounded-full text-white font-medium inline-block">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-[#6c5ce7]">Services</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-[#16213e] p-8 rounded-xl card-hover">
+                    <div class="w-16 h-16 bg-[#6c5ce7] bg-opacity-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-3xl text-[#6c5ce7]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Web Design</h3>
+                    <p class="text-gray-300 mb-6">
+                        Creating beautiful, responsive websites with modern design principles and user experience at the forefront.
+                    </p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#6c5ce7] mr-2"></i>
+                            UI/UX Design
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#6c5ce7] mr-2"></i>
+                            Responsive Layouts
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#6c5ce7] mr-2"></i>
+                            Prototyping
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-[#16213e] p-8 rounded-xl card-hover">
+                    <div class="w-16 h-16 bg-[#fd79a8] bg-opacity-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-3xl text-[#fd79a8]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Web Development</h3>
+                    <p class="text-gray-300 mb-6">
+                        Building robust, scalable web applications with clean, maintainable code and modern frameworks.
+                    </p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#fd79a8] mr-2"></i>
+                            Frontend Development
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#fd79a8] mr-2"></i>
+                            Backend Development
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#fd79a8] mr-2"></i>
+                            API Integration
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-[#16213e] p-8 rounded-xl card-hover">
+                    <div class="w-16 h-16 bg-[#a29bfe] bg-opacity-20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-project-diagram text-3xl text-[#a29bfe]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Real-time Projects</h3>
+                    <p class="text-gray-300 mb-6">
+                        Developing interactive real-time applications with WebSockets, Python and modern communication protocols.
+                    </p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#a29bfe] mr-2"></i>
+                            Live Updates
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#a29bfe] mr-2"></i>
+                            Chat Applications
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-[#a29bfe] mr-2"></i>
+                            Collaborative Tools
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-[#16213e]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-[#6c5ce7]">Projects</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card h-80">
+                    <div class="project-card-inner relative w-full h-full">
+                        <div class="project-card-front absolute w-full h-full bg-[#1a1a2e] rounded-xl overflow-hidden">
+                            <img src="facetracking.jpg.png" 
+                                 alt="Project 1" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-semibold text-white">Study Time Tracker</h3>
+                                <p class="text-gray-300">Python, OpenCV, Xampp</p>
+                            </div>
+                        </div>
+                        <div class="project-card-back absolute w-full h-full bg-[#1a1a2e] rounded-xl p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-4 text-[#6c5ce7]">Study Time Tracker</h3>
+                            <p class="text-gray-300 mb-4">
+                                A full-featured Study time tracker platform with productive study time, checking of you effictiveness and recovering it .
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">Python</span>
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">OpenCV</span>
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">Xampp</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="#" class="px-4 py-2 bg-[#6c5ce7] text-white rounded-lg hover:bg-[#5d4aec] transition">
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/adityar2216v/Python-projects-/blob/master/facetrack.py" class="px-4 py-2 border border-[#6c5ce7] text-[#6c5ce7] rounded-lg hover:bg-[#6c5ce7] hover:text-white transition">
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card h-80">
+                    <div class="project-card-inner relative w-full h-full">
+                        <div class="project-card-front absolute w-full h-full bg-[#1a1a2e] rounded-xl overflow-hidden">
+                            <img src="jarvis.png" 
+                                 alt="Project 2" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-semibold text-white">Jarvis AI</h3>
+                                <p class="text-gray-300">Python, Firebase,SPR MODULE</p>
+                            </div>
+                        </div>
+                        <div class="project-card-back absolute w-full h-full bg-[#1a1a2e] rounded-xl p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-4 text-[#6c5ce7]">Task Helping Bot</h3>
+                            <p class="text-gray-300 mb-4">
+                                A collaborative task helping bot with real-time updates and team functionality. Using voice comands to perform taasks easily.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">Python</span>
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">Firebase</span>
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">Real-time</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="#" class="px-4 py-2 bg-[#6c5ce7] text-white rounded-lg hover:bg-[#5d4aec] transition">
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/adityar2216v/Python-projects-/blob/master/jarvis.py" class="px-4 py-2 border border-[#6c5ce7] text-[#6c5ce7] rounded-lg hover:bg-[#6c5ce7] hover:text-white transition">
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card h-80">
+                    <div class="project-card-inner relative w-full h-full">
+                        <div class="project-card-front absolute w-full h-full bg-[#1a1a2e] rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                                 alt="Project 3" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-semibold text-white">Portfolio Website</h3>
+                                <p class="text-gray-300">HTML, CSS, JavaScript</p>
+                            </div>
+                        </div>
+                        <div class="project-card-back absolute w-full h-full bg-[#1a1a2e] rounded-xl p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-4 text-[#6c5ce7]">Portfolio Website</h3>
+                            <p class="text-gray-300 mb-4">
+                                A modern, responsive portfolio website showcasing my work and skills with smooth animations.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">HTML</span>
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">CSS</span>
+                                <span class="px-3 py-1 bg-[#6c5ce7] bg-opacity-20 text-[#6c5ce7] rounded-full text-sm">JavaScript</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="#" class="px-4 py-2 bg-[#6c5ce7] text-white rounded-lg hover:bg-[#5d4aec] transition">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 border border-[#6c5ce7] text-[#6c5ce7] rounded-lg hover:bg-[#6c5ce7] hover:text-white transition">
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn-primary px-6 py-3 rounded-full text-white font-medium inline-block">
+                    View All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="text-[#6c5ce7]">Touch</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
+                    <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                    <p class="text-gray-300 mb-8">
+                        Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#6c5ce7] bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-[#6c5ce7]"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-[#a29bfe]">Location</h4>
+                                <p class="text-gray-300">Greater Noida, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#fd79a8] bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-[#fd79a8]"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-[#a29bfe]">Email</h4>
+                                <p class="text-gray-300">srivastavaadityaraj0205.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#a29bfe] bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-[#a29bfe]"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-[#a29bfe]">Phone</h4>
+                                <p class="text-gray-300">+91 9170806003</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-medium text-[#a29bfe] mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/adityar2216v" class="w-10 h-10 bg-[#6c5ce7] bg-opacity-20 rounded-full flex items-center justify-center text-[#6c5ce7] hover:bg-[#6c5ce7] hover:text-white transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/aditya-raj-srivastava-401b75328" class="w-10 h-10 bg-[#6c5ce7] bg-opacity-20 rounded-full flex items-center justify-center text-[#6c5ce7] hover:bg-[#6c5ce7] hover:text-white transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://x.com/Aditya_Raj_Sri?t=7L4PY4n9hKbf618g6SsdSA&s=08" class="w-10 h-10 bg-[#6c5ce7] bg-opacity-20 rounded-full flex items-center justify-center text-[#6c5ce7] hover:bg-[#6c5ce7] hover:text-white transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/aditya_raj_srivastava_02/" class="w-10 h-10 bg-[#6c5ce7] bg-opacity-20 rounded-full flex items-center justify-center text-[#6c5ce7] hover:bg-[#6c5ce7] hover:text-white transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg input-field focus:outline-none" placeholder="Aditya RAJ">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg input-field focus:outline-none" placeholder="abc@gmail.com">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg input-field focus:outline-none" placeholder="Project Inquiry">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg input-field focus:outline-none" placeholder="Hello, I would like to talk about..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full px-6 py-3 rounded-lg text-white font-medium">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#16213e] py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl font-bold text-white mb-4 md:mb-0">
+                    <span class="text-[#6c5ce7]">Aditya Raj</span>Srivastava
+                </div>
+                
+                <div class="text-gray-400 mb-4 md:mb-0">
+                    © 2025 Aditya Portfolio. All rights reserved.
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://github.com/adityar2216v" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/aditya-raj-srivastava-401b75328" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://x.com/Aditya_Raj_Sri?t=7L4PY4n9hKbf618g6SsdSA&s=08" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/aditya_raj_srivastava_02/" class="text-gray-400 hover:text-[#6c5ce7] transition">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const sections = document.querySelectorAll('.section');
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+            section.classList.add('section');
+        });
+
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        const skillObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // Typewriter effect for rotating words
+        const rotatingWords = document.querySelectorAll('.rotating-word');
+        
+        // On mobile, show all words stacked
+        if (window.innerWidth <= 768) {
+            rotatingWords.forEach(word => {
+                word.style.position = 'relative';
+                word.style.opacity = '1';
+                word.style.animation = 'none';
+                word.style.display = 'block';
+                word.style.marginBottom = '0.5em';
+            });
+        }
+    </script>
+</body>
+</html>
