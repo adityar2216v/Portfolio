@@ -581,126 +581,42 @@
                 </h2>
             </div>
 
-            <!-- Professional Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div
-                    class="bg-slate-900/40 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-white/10 hover:shadow-2xl transition duration-300 group fade-up">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="fintech.png" alt="FinTech AI"
-                            class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                        <div
-                            class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition duration-300">
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2">FinTech AI Processor</h3>
-                                <p class="text-[#0284c7] font-semibold text-sm">Next.js • TypeScript • AI</p>
-                            </div>
-                            <!-- Github/Link Icon could go here -->
-                        </div>
-                        <p class="text-slate-600 mb-6 leading-relaxed">
-                            AI-powered system to extract, normalize, and analyze data from invoices and receipts
-                            using intelligent concept mapping.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">React</span>
-                            <span class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">AI</span>
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">TypeScript</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Project Slider Layout -->
+            <div class="max-w-6xl mx-auto px-4 md:px-8 py-10">
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
 
-                <!-- Project 2 -->
-                <div
-                    class="bg-slate-900/40 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-white/10 hover:shadow-2xl transition duration-300 group fade-up delay-100">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="tweet.png" alt="Tw33t"
-                            class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                        <div
-                            class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition duration-300">
-                        </div>
+                    <!-- Left Column: Image Stack -->
+                    <div class="h-80 w-full relative" id="project-images" style="perspective: 1000px;">
+                        <!-- Images injected by JS -->
                     </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2">Tw33t Social App</h3>
-                                <p class="text-[#0284c7] font-semibold text-sm">Next.js • Modern UI</p>
-                            </div>
-                        </div>
-                        <p class="text-slate-600 mb-6 leading-relaxed">
-                            A social-media-style web application featuring routing, reusable components, and
-                            modern UI patterns.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">Next.js</span>
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">Tailwind</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Project 3 -->
-                <div
-                    class="bg-slate-900/40 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-white/10 hover:shadow-2xl transition duration-300 group fade-up delay-200">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="rwf.png" alt="Rising Welfare"
-                            class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                        <div
-                            class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition duration-300">
+                    <!-- Right Column: Content -->
+                    <div class="flex justify-between flex-col py-4 relative z-20">
+                        <div class="transition-all duration-300">
+                            <h3 id="project-name"
+                                class="text-3xl font-bold text-white mb-2 transition-all duration-300">
+                                Project Name
+                            </h3>
+                            <p id="project-role"
+                                class="text-lg text-[#0284c7] font-semibold transition-all duration-300">
+                                Project Designation
+                            </p>
+                            <p id="project-quote" class="text-lg text-slate-400 mt-8 leading-relaxed min-h-[100px]">
+                                <!-- Quote words injected by JS -->
+                            </p>
                         </div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2">Rising Welfare</h3>
-                                <p class="text-[#0284c7] font-semibold text-sm">MERN Stack</p>
-                            </div>
-                        </div>
-                        <p class="text-slate-600 mb-6 leading-relaxed">
-                            Developed a foundation website with dynamic backend integration.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">MongoDB</span>
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">Node</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Project 4 (Optional - or remove if only 3 needed) -->
-                <div
-                    class="bg-slate-900/40 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-white/10 hover:shadow-2xl transition duration-300 group fade-up delay-300 lg:col-span-1 md:col-span-2 lg:col-start-auto md:col-start-auto">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
-                            alt="Coders Era"
-                            class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                        <div
-                            class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition duration-300">
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2">Coders Era Community</h3>
-                                <p class="text-[#0284c7] font-semibold text-sm">Community Platform</p>
-                            </div>
-                        </div>
-                        <p class="text-slate-600 mb-6 leading-relaxed">
-                            Designed and developed the official website for a tech community. Focused on
-                            clean UI, accessibility, and performance.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">HTML/CSS</span>
-                            <span
-                                class="px-3 py-1 bg-slate-800 text-[#0284c7] text-xs rounded-full font-bold">Web</span>
+                        <div class="flex gap-4 pt-12">
+                            <button id="prev-project"
+                                class="h-12 w-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center group transition shadow-lg border border-white/10">
+                                <i
+                                    class="fas fa-arrow-left text-white group-hover:-rotate-12 transition-transform duration-300"></i>
+                            </button>
+                            <button id="next-project"
+                                class="h-12 w-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center group transition shadow-lg border border-white/10">
+                                <i
+                                    class="fas fa-arrow-right text-white group-hover:rotate-12 transition-transform duration-300"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -711,6 +627,31 @@
                 <a href="https://github.com/adityar2216v" class="btn-outline inline-flex items-center">
                     View More on GitHub <i class="fab fa-github ml-2"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-24 relative bg-transparent">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20 fade-up">
+                <span class="text-[#0284c7] font-bold tracking-wider uppercase text-sm">Achievements</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 text-slate-900">My <span
+                        class="gradient-text">Certificates</span></h2>
+            </div>
+
+            <!-- Certificate Stack Container -->
+            <div class="relative w-full max-w-4xl mx-auto h-[450px] flex items-center justify-center perspective-1000"
+                style="perspective: 1000px;">
+                <div id="cert-stack-container"
+                    class="relative w-full h-full flex items-center justify-center transition-all">
+                    <!-- Cards Injected by JS -->
+                </div>
+            </div>
+
+            <!-- Navigation Dots -->
+            <div id="cert-stack-dots" class="flex justify-center mt-8 gap-3">
+                <!-- Dots Injected by JS -->
             </div>
         </div>
     </section>
@@ -829,6 +770,8 @@
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="contact.js"></script>
+    <script src="projects-slider.js"></script>
+    <script src="certificates-stack.js"></script>
 
     <script>
         // Preloader Logic
