@@ -2,7 +2,7 @@
 // IMPORTANT: Replace these with your actual EmailJS credentials
 const SERVICE_ID = "service_txzaf5q";
 const TEMPLATE_ID = "template_b1p8h5q";
-const PUBLIC_KEY = "35lv7q5Yn_uMs8agd";
+const PUBLIC_KEY = "XNLF1sD_tc5ovnJSk";
 
 (function () {
     emailjs.init(PUBLIC_KEY);
@@ -81,3 +81,4 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
